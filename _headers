@@ -1,0 +1,25 @@
+/*
+  # Security Headers — Applied to all pages
+  # These protect your visitors and improve trust scores
+
+  # Prevents clickjacking attacks
+  X-Frame-Options: SAMEORIGIN
+
+  # Prevents MIME type sniffing
+  X-Content-Type-Options: nosniff
+
+  # Controls referrer info sent to other sites
+  Referrer-Policy: strict-origin-when-cross-origin
+
+  # Content Security Policy — prevents XSS attacks
+  # UPDATE: Add any third-party script domains you use (e.g., analytics)
+  Content-Security-Policy: default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data:; media-src 'self'; connect-src 'self'
+
+  # Enables browser XSS protection
+  X-XSS-Protection: 1; mode=block
+
+  # Forces HTTPS
+  Strict-Transport-Security: max-age=31536000; includeSubDomains; preload
+
+  # Controls browser features
+  Permissions-Policy: camera=(), microphone=(), geolocation=()

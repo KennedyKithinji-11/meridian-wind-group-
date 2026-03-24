@@ -1,0 +1,24 @@
+{
+  "name": "Meridian Wind Group",
+  "short_name": "MWG",
+  "description": "America's leading commercial advocate for landowners in wind energy and the US–Africa wind advisory bridge.",
+  "start_url": "/",
+  "display": "browser",
+  "background_color": "#0A1628",
+  "theme_color": "#00B4A6",
+  "lang": "en-US",
+  "icons": [
+    {
+      "src": "/assets/icons/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/assets/icons/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ]
+}

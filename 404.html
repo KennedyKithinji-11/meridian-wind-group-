@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Page Not Found — Meridian Wind Group</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;1,300&family=Space+Mono&display=swap" rel="stylesheet">
+<style>
+  :root { --navy:#0A1628; --teal:#00B4A6; --white:#FFFFFF; --gray:#8A9BB0; }
+  * { margin:0; padding:0; box-sizing:border-box; }
+  body {
+    background: var(--navy);
+    color: var(--white);
+    font-family: 'Space Mono', monospace;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+  }
+  .container { padding: 40px; }
+  .code {
+    font-size: clamp(80px, 20vw, 180px);
+    font-family: 'Cormorant Garamond', serif;
+    font-weight: 300;
+    color: rgba(0,180,166,0.15);
+    line-height: 1;
+    letter-spacing: -0.04em;
+    margin-bottom: 24px;
+  }
+  .label {
+    font-size: 10px;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: var(--teal);
+    margin-bottom: 16px;
+  }
+  .message {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(24px, 4vw, 40px);
+    font-weight: 300;
+    font-style: italic;
+    color: rgba(255,255,255,0.7);
+    margin-bottom: 40px;
+  }
+  .home-link {
+    font-size: 10px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--navy);
+    background: var(--teal);
+    padding: 14px 32px;
+    text-decoration: none;
+    display: inline-block;
+    transition: opacity 0.3s;
+  }
+  .home-link:hover { opacity: 0.85; }
+</style>
+</head>
+<body>
+  <div class="container">
+    <div class="code">404</div>
+    <p class="label">Page Not Found</p>
+    <p class="message">The wind blew this page somewhere else.</p>
+    <a href="/" class="home-link">Return Home</a>
+  </div>
+</body>
+</html>

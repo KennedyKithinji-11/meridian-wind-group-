@@ -1,0 +1,1946 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Meridian Wind Group — Powering the Future</title>
+
+<!-- ============================================================
+  FONT IMPORTS
+  Display: Cormorant Garamond (editorial, high contrast, refined)
+  Body: DM Sans (clean, modern, readable)
+  Accent: Space Mono (technical credibility)
+============================================================ -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;0,700;1,300;1,400&family=DM+Sans:wght@300;400;500&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+
+<style>
+/* ============================================================
+   CSS CUSTOM PROPERTIES — Update brand colors here
+============================================================ */
+:root {
+  --navy:       #0A1628;
+  --navy-deep:  #050E1A;
+  --teal:       #00B4A6;
+  --teal-glow:  rgba(0,180,166,0.15);
+  --teal-dim:   rgba(0,180,166,0.06);
+  --gold:       #F5A623;
+  --white:      #FFFFFF;
+  --offwhite:   #F2F0EB;
+  --gray-lt:    #8A9BB0;
+  --gray-dk:    #3A4A5A;
+
+  --font-display: 'Cormorant Garamond', serif;
+  --font-body:    'DM Sans', sans-serif;
+  --font-mono:    'Space Mono', monospace;
+
+  --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-in-out:   cubic-bezier(0.76, 0, 0.24, 1);
+}
+
+/* ============================================================
+   RESET & BASE
+============================================================ */
+*, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
+html { scroll-behavior: smooth; font-size: 16px; }
+body {
+  background: var(--navy-deep);
+  color: var(--white);
+  font-family: var(--font-body);
+  font-weight: 300;
+  overflow-x: hidden;
+  cursor: none;
+}
+
+/* ============================================================
+   CUSTOM CURSOR
+============================================================ */
+.cursor {
+  position: fixed;
+  width: 12px; height: 12px;
+  background: var(--teal);
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 9999;
+  mix-blend-mode: difference;
+  transition: transform 0.15s var(--ease-out-expo),
+              width 0.3s var(--ease-out-expo),
+              height 0.3s var(--ease-out-expo);
+  transform: translate(-50%, -50%);
+}
+.cursor-ring {
+  position: fixed;
+  width: 40px; height: 40px;
+  border: 1px solid rgba(0,180,166,0.5);
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 9998;
+  transform: translate(-50%, -50%);
+  transition: transform 0.5s var(--ease-out-expo),
+              width 0.4s var(--ease-out-expo),
+              height 0.4s var(--ease-out-expo),
+              border-color 0.3s;
+}
+.cursor.hover { width: 6px; height: 6px; }
+.cursor-ring.hover { width: 60px; height: 60px; border-color: var(--teal); }
+
+/* ============================================================
+   NAVIGATION — Update links and contact info here
+============================================================ */
+nav {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  z-index: 1000;
+  padding: 28px 48px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  mix-blend-mode: normal;
+}
+nav::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to bottom, rgba(5,14,26,0.8), transparent);
+  pointer-events: none;
+}
+.nav-logo {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 0.18em;
+  color: var(--white);
+  text-decoration: none;
+  text-transform: uppercase;
+  position: relative;
+}
+.nav-logo span { color: var(--teal); }
+.nav-links {
+  display: flex;
+  gap: 40px;
+  list-style: none;
+  position: relative;
+}
+.nav-links a {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--gray-lt);
+  text-decoration: none;
+  transition: color 0.3s;
+  position: relative;
+}
+.nav-links a::after {
+  content: '';
+  position: absolute;
+  bottom: -3px; left: 0;
+  width: 0; height: 1px;
+  background: var(--teal);
+  transition: width 0.4s var(--ease-out-expo);
+}
+.nav-links a:hover { color: var(--white); }
+.nav-links a:hover::after { width: 100%; }
+.nav-cta {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--teal);
+  border: 1px solid rgba(0,180,166,0.4);
+  padding: 10px 20px;
+  text-decoration: none;
+  position: relative;
+  overflow: hidden;
+  transition: color 0.4s, border-color 0.4s;
+}
+.nav-cta::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: var(--teal);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.4s var(--ease-out-expo);
+}
+.nav-cta:hover { color: var(--navy-deep); border-color: var(--teal); }
+.nav-cta:hover::before { transform: scaleX(1); }
+.nav-cta span { position: relative; z-index: 1; }
+
+/* ============================================================
+   HERO — Full-screen video section
+   VIDEO: Replace 'windmill.mp4' with your video file path
+============================================================ */
+.hero {
+  position: relative;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  overflow: hidden;
+}
+.hero-video {
+  position: absolute;
+  inset: 0;
+  width: 100%; height: 100%;
+  object-fit: cover;
+  opacity: 0.45;
+  transform: scale(1.05);
+  transition: transform 20s linear;
+}
+.hero-video.loaded { transform: scale(1); }
+.hero-overlay {
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(135deg, rgba(5,14,26,0.85) 0%, rgba(5,14,26,0.4) 60%, transparent 100%),
+    linear-gradient(to top, var(--navy-deep) 0%, transparent 40%);
+}
+/* Animated grid overlay */
+.hero-grid {
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(rgba(0,180,166,0.04) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(0,180,166,0.04) 1px, transparent 1px);
+  background-size: 80px 80px;
+  opacity: 0;
+  animation: gridFadeIn 2s 1s var(--ease-out-expo) forwards;
+}
+@keyframes gridFadeIn { to { opacity: 1; } }
+
+.hero-content {
+  position: relative;
+  z-index: 2;
+  padding: 0 48px;
+  max-width: 1200px;
+}
+.hero-eyebrow {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: var(--teal);
+  margin-bottom: 28px;
+  opacity: 0;
+  transform: translateY(20px);
+  animation: slideUp 0.8s 0.5s var(--ease-out-expo) forwards;
+}
+.hero-title {
+  font-family: var(--font-display);
+  font-weight: 300;
+  font-size: clamp(64px, 10vw, 140px);
+  line-height: 0.92;
+  letter-spacing: -0.02em;
+  opacity: 0;
+  transform: translateY(40px);
+  animation: slideUp 1s 0.7s var(--ease-out-expo) forwards;
+}
+.hero-title em {
+  font-style: italic;
+  color: var(--teal);
+}
+.hero-title .outline {
+  -webkit-text-stroke: 1px rgba(255,255,255,0.3);
+  color: transparent;
+}
+.hero-sub {
+  margin-top: 40px;
+  max-width: 520px;
+  font-size: 16px;
+  line-height: 1.7;
+  color: rgba(255,255,255,0.65);
+  font-weight: 300;
+  opacity: 0;
+  transform: translateY(30px);
+  animation: slideUp 1s 1s var(--ease-out-expo) forwards;
+}
+.hero-actions {
+  margin-top: 48px;
+  display: flex;
+  align-items: center;
+  gap: 32px;
+  opacity: 0;
+  transform: translateY(20px);
+  animation: slideUp 1s 1.2s var(--ease-out-expo) forwards;
+}
+.btn-primary {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--navy-deep);
+  background: var(--teal);
+  padding: 16px 36px;
+  text-decoration: none;
+  display: inline-block;
+  position: relative;
+  overflow: hidden;
+  transition: transform 0.3s var(--ease-out-expo);
+}
+.btn-primary::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: var(--gold);
+  transform: scaleX(0);
+  transform-origin: right;
+  transition: transform 0.4s var(--ease-out-expo);
+}
+.btn-primary:hover { transform: translateY(-2px); }
+.btn-primary:hover::after { transform: scaleX(1); }
+.btn-primary span { position: relative; z-index: 1; }
+
+.btn-ghost {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.7);
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  transition: color 0.3s, gap 0.3s var(--ease-out-expo);
+}
+.btn-ghost::after {
+  content: '→';
+  transition: transform 0.3s var(--ease-out-expo);
+}
+.btn-ghost:hover { color: var(--white); gap: 18px; }
+.btn-ghost:hover::after { transform: translateX(4px); }
+
+/* Hero stats bar */
+.hero-stats {
+  position: absolute;
+  bottom: 60px;
+  right: 48px;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  opacity: 0;
+  animation: fadeIn 1s 1.5s forwards;
+}
+.stat-item {
+  text-align: right;
+}
+.stat-num {
+  font-family: var(--font-display);
+  font-size: 36px;
+  font-weight: 600;
+  color: var(--teal);
+  line-height: 1;
+}
+.stat-label {
+  font-family: var(--font-mono);
+  font-size: 9px;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--gray-lt);
+  margin-top: 4px;
+}
+
+/* Scroll indicator */
+.scroll-indicator {
+  position: absolute;
+  bottom: 40px;
+  left: 48px;
+  z-index: 2;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  opacity: 0;
+  animation: fadeIn 1s 2s forwards;
+}
+.scroll-line {
+  width: 40px;
+  height: 1px;
+  background: linear-gradient(to right, transparent, var(--teal));
+  position: relative;
+  overflow: hidden;
+}
+.scroll-line::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: var(--teal);
+  animation: scrollPulse 2s infinite;
+}
+@keyframes scrollPulse {
+  0% { transform: translateX(-100%); }
+  100% { transform: translateX(200%); }
+}
+.scroll-text {
+  font-family: var(--font-mono);
+  font-size: 9px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--gray-lt);
+}
+
+@keyframes slideUp {
+  to { opacity: 1; transform: translateY(0); }
+}
+@keyframes fadeIn {
+  to { opacity: 1; }
+}
+
+/* ============================================================
+   TICKER / MARQUEE — Update text items as needed
+============================================================ */
+.ticker-wrap {
+  background: var(--teal);
+  padding: 12px 0;
+  overflow: hidden;
+  position: relative;
+  z-index: 10;
+}
+.ticker {
+  display: flex;
+  white-space: nowrap;
+  animation: ticker 25s linear infinite;
+}
+.ticker-item {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--navy-deep);
+  padding: 0 40px;
+  display: flex;
+  align-items: center;
+  gap: 40px;
+}
+.ticker-item::after {
+  content: '✦';
+  opacity: 0.5;
+}
+@keyframes ticker {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+
+/* ============================================================
+   SECTION BASE
+============================================================ */
+section { position: relative; }
+.section-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 48px;
+}
+
+/* ============================================================
+   STATEMENT SECTION — Bold editorial type
+============================================================ */
+.statement {
+  padding: 160px 0;
+  background: var(--navy-deep);
+  overflow: hidden;
+}
+.statement-label {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: var(--teal);
+  margin-bottom: 48px;
+  opacity: 0;
+  transform: translateX(-20px);
+  transition: opacity 0.8s, transform 0.8s var(--ease-out-expo);
+}
+.statement-label.visible { opacity: 1; transform: translateX(0); }
+.statement-heading {
+  font-family: var(--font-display);
+  font-weight: 300;
+  font-size: clamp(40px, 6vw, 84px);
+  line-height: 1.05;
+  letter-spacing: -0.02em;
+  max-width: 900px;
+}
+.statement-heading .reveal-word {
+  display: inline-block;
+  overflow: hidden;
+}
+.statement-heading .reveal-inner {
+  display: inline-block;
+  transform: translateY(100%);
+  transition: transform 0.9s var(--ease-out-expo);
+}
+.statement-heading.visible .reveal-inner { transform: translateY(0); }
+.statement-heading .reveal-word:nth-child(2) .reveal-inner { transition-delay: 0.05s; }
+.statement-heading .reveal-word:nth-child(3) .reveal-inner { transition-delay: 0.1s; }
+.statement-heading .reveal-word:nth-child(4) .reveal-inner { transition-delay: 0.15s; }
+.statement-heading .reveal-word:nth-child(5) .reveal-inner { transition-delay: 0.2s; }
+.statement-heading .reveal-word:nth-child(6) .reveal-inner { transition-delay: 0.25s; }
+.statement-heading .reveal-word:nth-child(7) .reveal-inner { transition-delay: 0.3s; }
+.statement-heading .reveal-word:nth-child(8) .reveal-inner { transition-delay: 0.35s; }
+.statement-heading .reveal-word:nth-child(9) .reveal-inner { transition-delay: 0.4s; }
+.statement-heading em { font-style: italic; color: var(--teal); }
+
+.statement-body {
+  margin-top: 60px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 80px;
+  align-items: end;
+}
+.statement-text {
+  font-size: 17px;
+  line-height: 1.75;
+  color: rgba(255,255,255,0.6);
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity 0.8s 0.3s, transform 0.8s 0.3s var(--ease-out-expo);
+}
+.statement-text.visible { opacity: 1; transform: translateY(0); }
+.statement-aside {
+  border-left: 1px solid rgba(0,180,166,0.3);
+  padding-left: 40px;
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity 0.8s 0.5s, transform 0.8s 0.5s var(--ease-out-expo);
+}
+.statement-aside.visible { opacity: 1; transform: translateY(0); }
+.aside-quote {
+  font-family: var(--font-display);
+  font-size: 22px;
+  font-style: italic;
+  line-height: 1.5;
+  color: rgba(255,255,255,0.85);
+  margin-bottom: 20px;
+}
+.aside-attr {
+  font-family: var(--font-mono);
+  font-size: 9px;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--teal);
+}
+
+/* ============================================================
+   SERVICES SECTION — Update service descriptions here
+============================================================ */
+.services {
+  padding: 140px 0;
+  background: var(--navy);
+  position: relative;
+  overflow: hidden;
+}
+.services::before {
+  content: '';
+  position: absolute;
+  top: -1px; left: 0; right: 0;
+  height: 1px;
+  background: linear-gradient(to right, transparent, var(--teal), transparent);
+}
+
+.services-header {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  margin-bottom: 80px;
+  gap: 40px;
+}
+.services-title {
+  font-family: var(--font-display);
+  font-size: clamp(36px, 5vw, 64px);
+  font-weight: 300;
+  line-height: 1;
+  letter-spacing: -0.02em;
+}
+.services-title em { font-style: italic; color: var(--teal); }
+.services-intro {
+  max-width: 340px;
+  font-size: 15px;
+  line-height: 1.7;
+  color: rgba(255,255,255,0.5);
+  text-align: right;
+}
+
+.services-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2px;
+}
+
+/* ── UPDATE SERVICES: Change titles, descriptions, and numbers below ── */
+.service-card {
+  padding: 48px 36px;
+  background: rgba(255,255,255,0.02);
+  border: 1px solid rgba(255,255,255,0.06);
+  position: relative;
+  overflow: hidden;
+  cursor: pointer;
+  transition: background 0.4s, border-color 0.4s;
+  opacity: 0;
+  transform: translateY(40px);
+  transition: opacity 0.7s var(--ease-out-expo),
+              transform 0.7s var(--ease-out-expo),
+              background 0.4s,
+              border-color 0.4s;
+}
+.service-card.visible { opacity: 1; transform: translateY(0); }
+.service-card:nth-child(2) { transition-delay: 0.1s; }
+.service-card:nth-child(3) { transition-delay: 0.2s; }
+.service-card:nth-child(4) { transition-delay: 0.15s; }
+.service-card:nth-child(5) { transition-delay: 0.25s; }
+.service-card:nth-child(6) { transition-delay: 0.35s; }
+
+.service-card::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, var(--teal-glow), transparent);
+  opacity: 0;
+  transition: opacity 0.4s;
+}
+.service-card::after {
+  content: '';
+  position: absolute;
+  bottom: 0; left: 0; right: 0;
+  height: 2px;
+  background: var(--teal);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.5s var(--ease-out-expo);
+}
+.service-card:hover { background: rgba(0,180,166,0.04); border-color: rgba(0,180,166,0.2); }
+.service-card:hover::before { opacity: 1; }
+.service-card:hover::after { transform: scaleX(1); }
+
+.service-num {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  letter-spacing: 0.15em;
+  color: var(--teal);
+  margin-bottom: 32px;
+  opacity: 0.7;
+}
+.service-icon {
+  width: 40px; height: 40px;
+  margin-bottom: 24px;
+  color: var(--teal);
+  opacity: 0.7;
+  transition: opacity 0.3s, transform 0.4s var(--ease-out-expo);
+}
+.service-card:hover .service-icon { opacity: 1; transform: scale(1.1); }
+.service-name {
+  font-family: var(--font-display);
+  font-size: 26px;
+  font-weight: 400;
+  line-height: 1.2;
+  margin-bottom: 16px;
+  transition: color 0.3s;
+}
+.service-card:hover .service-name { color: var(--teal); }
+.service-desc {
+  font-size: 14px;
+  line-height: 1.7;
+  color: rgba(255,255,255,0.45);
+  transition: color 0.3s;
+}
+.service-card:hover .service-desc { color: rgba(255,255,255,0.65); }
+.service-arrow {
+  position: absolute;
+  bottom: 32px; right: 32px;
+  font-size: 18px;
+  color: var(--teal);
+  opacity: 0;
+  transform: translate(-8px, 8px);
+  transition: opacity 0.3s, transform 0.4s var(--ease-out-expo);
+}
+.service-card:hover .service-arrow { opacity: 1; transform: translate(0,0); }
+
+/* ============================================================
+   MARKETS / WHO WE SERVE — Update target clients here
+============================================================ */
+.markets {
+  padding: 160px 0;
+  background: var(--navy-deep);
+  overflow: hidden;
+}
+.markets-label {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: var(--teal);
+  margin-bottom: 32px;
+  opacity: 0;
+  transition: opacity 0.8s;
+}
+.markets-label.visible { opacity: 1; }
+.markets-heading {
+  font-family: var(--font-display);
+  font-size: clamp(44px, 6.5vw, 90px);
+  font-weight: 300;
+  line-height: 0.95;
+  letter-spacing: -0.03em;
+  margin-bottom: 80px;
+}
+.markets-heading em { font-style: italic; color: var(--teal); }
+.markets-heading .outline {
+  -webkit-text-stroke: 1px rgba(255,255,255,0.2);
+  color: transparent;
+}
+
+/* ── UPDATE MARKETS: Change client segments here ── */
+.markets-list { list-style: none; }
+.market-item {
+  display: flex;
+  align-items: center;
+  gap: 40px;
+  padding: 36px 0;
+  border-bottom: 1px solid rgba(255,255,255,0.06);
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+  opacity: 0;
+  transform: translateX(-30px);
+  transition: opacity 0.7s var(--ease-out-expo), transform 0.7s var(--ease-out-expo);
+}
+.market-item.visible { opacity: 1; transform: translateX(0); }
+.market-item:nth-child(2) { transition-delay: 0.1s; }
+.market-item:nth-child(3) { transition-delay: 0.2s; }
+.market-item:nth-child(4) { transition-delay: 0.3s; }
+.market-item:nth-child(5) { transition-delay: 0.4s; }
+
+.market-item::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to right, var(--teal-dim), transparent);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.5s var(--ease-out-expo);
+}
+.market-item:hover::before { transform: scaleX(1); }
+
+.market-num {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 0.1em;
+  color: var(--teal);
+  min-width: 36px;
+  opacity: 0.6;
+}
+.market-name {
+  font-family: var(--font-display);
+  font-size: clamp(28px, 3.5vw, 48px);
+  font-weight: 300;
+  letter-spacing: -0.01em;
+  flex: 1;
+  transition: color 0.3s, letter-spacing 0.4s var(--ease-out-expo);
+}
+.market-item:hover .market-name { color: var(--teal); letter-spacing: 0; }
+.market-tag {
+  font-family: var(--font-mono);
+  font-size: 9px;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.3);
+  padding: 6px 14px;
+  border: 1px solid rgba(255,255,255,0.1);
+  transition: color 0.3s, border-color 0.3s;
+}
+.market-item:hover .market-tag { color: var(--teal); border-color: var(--teal); }
+.market-arrow {
+  font-size: 20px;
+  color: var(--teal);
+  opacity: 0;
+  transform: translateX(-10px);
+  transition: opacity 0.3s, transform 0.4s var(--ease-out-expo);
+}
+.market-item:hover .market-arrow { opacity: 1; transform: translateX(0); }
+
+/* ============================================================
+   PROCESS / HOW WE WORK — Update steps here
+============================================================ */
+.process {
+  padding: 140px 0;
+  background: var(--navy);
+  position: relative;
+}
+.process::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 50%;
+  width: 1px; height: 100%;
+  background: linear-gradient(to bottom, transparent, rgba(0,180,166,0.2), transparent);
+}
+
+.process-header {
+  text-align: center;
+  margin-bottom: 100px;
+}
+.process-eyebrow {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: var(--teal);
+  margin-bottom: 24px;
+}
+.process-title {
+  font-family: var(--font-display);
+  font-size: clamp(40px, 5.5vw, 72px);
+  font-weight: 300;
+  letter-spacing: -0.02em;
+}
+.process-title em { font-style: italic; color: var(--teal); }
+
+/* ── UPDATE PROCESS: Change steps and descriptions here ── */
+.process-steps {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 60px 120px;
+  max-width: 900px;
+  margin: 0 auto;
+}
+.process-step {
+  opacity: 0;
+  transform: translateY(40px);
+  transition: opacity 0.8s var(--ease-out-expo), transform 0.8s var(--ease-out-expo);
+}
+.process-step.visible { opacity: 1; transform: translateY(0); }
+.process-step:nth-child(2) { transition-delay: 0.1s; }
+.process-step:nth-child(3) { transition-delay: 0.2s; }
+.process-step:nth-child(4) { transition-delay: 0.3s; }
+
+.step-num {
+  font-family: var(--font-display);
+  font-size: 72px;
+  font-weight: 600;
+  color: rgba(0,180,166,0.12);
+  line-height: 1;
+  margin-bottom: -10px;
+}
+.step-title {
+  font-family: var(--font-display);
+  font-size: 26px;
+  font-weight: 400;
+  margin-bottom: 16px;
+}
+.step-desc {
+  font-size: 14px;
+  line-height: 1.75;
+  color: rgba(255,255,255,0.45);
+}
+
+/* ============================================================
+   GLOBAL REACH — USA + Africa visual
+============================================================ */
+.global {
+  padding: 140px 0;
+  background: var(--navy-deep);
+  overflow: hidden;
+  position: relative;
+}
+.global-bg-text {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-family: var(--font-display);
+  font-size: clamp(100px, 18vw, 280px);
+  font-weight: 700;
+  color: transparent;
+  -webkit-text-stroke: 1px rgba(0,180,166,0.04);
+  white-space: nowrap;
+  pointer-events: none;
+  letter-spacing: -0.04em;
+}
+.global-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2px;
+  position: relative;
+  z-index: 1;
+}
+.global-panel {
+  padding: 80px 60px;
+  background: rgba(255,255,255,0.02);
+  border: 1px solid rgba(255,255,255,0.05);
+  position: relative;
+  overflow: hidden;
+  opacity: 0;
+  transform: translateY(40px);
+  transition: opacity 0.9s var(--ease-out-expo), transform 0.9s var(--ease-out-expo);
+}
+.global-panel.visible { opacity: 1; transform: translateY(0); }
+.global-panel:nth-child(2) { transition-delay: 0.15s; }
+.global-panel::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 2px;
+  background: linear-gradient(to right, var(--teal), transparent);
+}
+.global-panel:nth-child(2)::before {
+  background: linear-gradient(to left, var(--gold), transparent);
+}
+.global-region {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: var(--teal);
+  margin-bottom: 32px;
+}
+.global-panel:nth-child(2) .global-region { color: var(--gold); }
+.global-title {
+  font-family: var(--font-display);
+  font-size: clamp(40px, 5vw, 64px);
+  font-weight: 300;
+  letter-spacing: -0.02em;
+  line-height: 1;
+  margin-bottom: 32px;
+}
+.global-desc {
+  font-size: 15px;
+  line-height: 1.75;
+  color: rgba(255,255,255,0.5);
+  max-width: 380px;
+  margin-bottom: 40px;
+}
+
+/* ── UPDATE GLOBAL: Change market stats here ── */
+.global-stats {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+.g-stat {
+  display: flex;
+  align-items: baseline;
+  gap: 16px;
+}
+.g-stat-num {
+  font-family: var(--font-display);
+  font-size: 36px;
+  font-weight: 600;
+  color: var(--teal);
+}
+.global-panel:nth-child(2) .g-stat-num { color: var(--gold); }
+.g-stat-label {
+  font-size: 13px;
+  color: rgba(255,255,255,0.4);
+}
+
+/* ============================================================
+   TRUST / DIFFERENTIATORS
+============================================================ */
+.trust {
+  padding: 120px 0;
+  background: var(--teal);
+  position: relative;
+  overflow: hidden;
+}
+.trust::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(ellipse at 30% 50%, rgba(0,0,0,0.15) 0%, transparent 70%);
+}
+.trust-inner {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 80px;
+  align-items: center;
+}
+.trust-headline {
+  font-family: var(--font-display);
+  font-size: clamp(40px, 5.5vw, 72px);
+  font-weight: 300;
+  letter-spacing: -0.02em;
+  line-height: 1.05;
+  color: var(--navy-deep);
+}
+.trust-headline em { font-style: italic; }
+.trust-list {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+.trust-item {
+  padding: 24px 0;
+  border-bottom: 1px solid rgba(10,22,40,0.15);
+  display: flex;
+  gap: 20px;
+  align-items: flex-start;
+  opacity: 0;
+  transform: translateX(20px);
+  transition: opacity 0.7s var(--ease-out-expo), transform 0.7s var(--ease-out-expo);
+}
+.trust-item.visible { opacity: 1; transform: translateX(0); }
+.trust-item:nth-child(2) { transition-delay: 0.1s; }
+.trust-item:nth-child(3) { transition-delay: 0.2s; }
+.trust-item:nth-child(4) { transition-delay: 0.3s; }
+.trust-check {
+  width: 20px; height: 20px;
+  background: var(--navy-deep);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  margin-top: 2px;
+}
+.trust-check::after {
+  content: '✓';
+  font-size: 10px;
+  color: var(--teal);
+}
+.trust-text {
+  font-size: 16px;
+  line-height: 1.6;
+  color: var(--navy-deep);
+  font-weight: 400;
+}
+
+/* ============================================================
+   CTA SECTION — Update contact info here
+============================================================ */
+.cta-section {
+  padding: 180px 0;
+  background: var(--navy-deep);
+  position: relative;
+  overflow: hidden;
+  text-align: center;
+}
+.cta-section::before {
+  content: '';
+  position: absolute;
+  top: 50%; left: 50%;
+  transform: translate(-50%, -50%);
+  width: 600px; height: 600px;
+  background: radial-gradient(circle, rgba(0,180,166,0.08) 0%, transparent 70%);
+  pointer-events: none;
+}
+.cta-eyebrow {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: var(--teal);
+  margin-bottom: 32px;
+  opacity: 0;
+  transition: opacity 0.8s;
+}
+.cta-eyebrow.visible { opacity: 1; }
+.cta-heading {
+  font-family: var(--font-display);
+  font-size: clamp(48px, 8vw, 110px);
+  font-weight: 300;
+  letter-spacing: -0.03em;
+  line-height: 0.95;
+  margin-bottom: 48px;
+  position: relative;
+  z-index: 1;
+}
+.cta-heading em { font-style: italic; color: var(--teal); }
+
+/* ── UPDATE CONTACT: Change email and phone here ── */
+.cta-contact {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+  margin-bottom: 60px;
+}
+.cta-email {
+  font-family: var(--font-display);
+  font-size: clamp(18px, 2.5vw, 28px);
+  font-style: italic;
+  color: rgba(255,255,255,0.7);
+  text-decoration: none;
+  transition: color 0.3s;
+  position: relative;
+}
+.cta-email::after {
+  content: '';
+  position: absolute;
+  bottom: 0; left: 0; right: 0;
+  height: 1px;
+  background: var(--teal);
+  transform: scaleX(0);
+  transition: transform 0.4s var(--ease-out-expo);
+}
+.cta-email:hover { color: var(--teal); }
+.cta-email:hover::after { transform: scaleX(1); }
+
+.cta-or {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  letter-spacing: 0.2em;
+  color: rgba(255,255,255,0.2);
+}
+.cta-btn {
+  display: inline-block;
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--navy-deep);
+  background: var(--teal);
+  padding: 20px 56px;
+  text-decoration: none;
+  position: relative;
+  overflow: hidden;
+  transition: transform 0.3s var(--ease-out-expo);
+}
+.cta-btn::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: var(--gold);
+  transform: translateX(-100%);
+  transition: transform 0.5s var(--ease-out-expo);
+}
+.cta-btn span { position: relative; z-index: 1; }
+.cta-btn:hover { transform: translateY(-3px); }
+.cta-btn:hover::after { transform: translateX(0); }
+
+/* ============================================================
+   FOOTER — Update links and legal text here
+============================================================ */
+footer {
+  background: var(--navy);
+  padding: 60px 0 40px;
+  border-top: 1px solid rgba(255,255,255,0.06);
+}
+.footer-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 48px;
+}
+.footer-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 60px;
+  gap: 40px;
+}
+.footer-brand {}
+.footer-logo {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  letter-spacing: 0.15em;
+  color: var(--white);
+  text-transform: uppercase;
+  margin-bottom: 12px;
+}
+.footer-logo span { color: var(--teal); }
+.footer-tagline {
+  font-family: var(--font-display);
+  font-style: italic;
+  font-size: 16px;
+  color: rgba(255,255,255,0.4);
+}
+.footer-links {
+  display: flex;
+  gap: 60px;
+}
+.footer-col {}
+.footer-col-title {
+  font-family: var(--font-mono);
+  font-size: 9px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--teal);
+  margin-bottom: 20px;
+}
+.footer-col ul { list-style: none; display: flex; flex-direction: column; gap: 12px; }
+.footer-col ul a {
+  font-size: 13px;
+  color: rgba(255,255,255,0.4);
+  text-decoration: none;
+  transition: color 0.3s;
+}
+.footer-col ul a:hover { color: var(--white); }
+.footer-bottom {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-top: 32px;
+  border-top: 1px solid rgba(255,255,255,0.06);
+}
+.footer-legal {
+  font-family: var(--font-mono);
+  font-size: 9px;
+  letter-spacing: 0.1em;
+  color: rgba(255,255,255,0.2);
+}
+
+/* ============================================================
+   FLOATING AMBIENT PARTICLES
+============================================================ */
+.particles {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+  overflow: hidden;
+}
+.particle {
+  position: absolute;
+  width: 2px; height: 2px;
+  background: var(--teal);
+  border-radius: 50%;
+  opacity: 0;
+  animation: particleFloat var(--dur, 8s) var(--delay, 0s) infinite;
+}
+@keyframes particleFloat {
+  0% { opacity: 0; transform: translateY(100vh) scale(0); }
+  10% { opacity: 0.6; }
+  90% { opacity: 0.2; }
+  100% { opacity: 0; transform: translateY(-20vh) scale(1.5); }
+}
+
+/* ============================================================
+   RESPONSIVE
+============================================================ */
+@media (max-width: 900px) {
+  nav { padding: 20px 24px; }
+  .nav-links { display: none; }
+  .section-inner { padding: 0 24px; }
+  .hero-content { padding: 0 24px; }
+  .hero-stats { right: 24px; bottom: 80px; }
+  .services-grid { grid-template-columns: 1fr; }
+  .services-header { flex-direction: column; align-items: flex-start; }
+  .services-intro { text-align: left; }
+  .statement-body { grid-template-columns: 1fr; gap: 40px; }
+  .global-grid { grid-template-columns: 1fr; }
+  .trust-inner { grid-template-columns: 1fr; }
+  .process-steps { grid-template-columns: 1fr; }
+  .footer-top { flex-direction: column; }
+  .footer-links { gap: 40px; }
+  .scroll-indicator { display: none; }
+  .process::before { display: none; }
+  .hero-stats { display: none; }
+}
+
+/* ============================================================
+   UTILITY ANIMATIONS
+============================================================ */
+.fade-up {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity 0.8s var(--ease-out-expo), transform 0.8s var(--ease-out-expo);
+}
+.fade-up.visible { opacity: 1; transform: translateY(0); }
+
+/* Noise grain overlay */
+body::after {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.03'/%3E%3C/svg%3E");
+  pointer-events: none;
+  z-index: 9997;
+  opacity: 0.4;
+}
+</style>
+</head>
+<body>
+
+<!-- ============================================================
+  CUSTOM CURSOR
+============================================================ -->
+<div class="cursor" id="cursor"></div>
+<div class="cursor-ring" id="cursorRing"></div>
+
+<!-- ============================================================
+  AMBIENT PARTICLES
+============================================================ -->
+<div class="particles" id="particles"></div>
+
+<!-- ============================================================
+  NAVIGATION
+  UPDATE: Change logo text, nav links, and CTA button text/href
+============================================================ -->
+<nav>
+  <a href="#" class="nav-logo">Meridian <span>Wind</span> Group</a>
+  <ul class="nav-links">
+    <li><a href="#services">Services</a></li>
+    <li><a href="#markets">Who We Serve</a></li>
+    <li><a href="#global">Global Reach</a></li>
+    <li><a href="#process">Our Process</a></li>
+  </ul>
+  <!-- UPDATE: Change href to your contact page or email link -->
+  <a href="#contact" class="nav-cta"><span>Start a Conversation</span></a>
+</nav>
+
+<!-- ============================================================
+  HERO SECTION
+  VIDEO: The src="windmill.mp4" will be replaced by the uploaded video
+  UPDATE: Tagline, subheading, and CTA links
+============================================================ -->
+<section class="hero" id="home">
+  <!-- VIDEO BACKGROUND — Replace src with your video file path -->
+  <video class="hero-video" id="heroVideo" autoplay muted loop playsinline>
+    <source src="windmill.mp4" type="video/mp4">
+  </video>
+  <div class="hero-overlay"></div>
+  <div class="hero-grid"></div>
+
+  <div class="hero-content">
+    <!-- UPDATE: Main hero headline -->
+    <p class="hero-eyebrow">Meridian Wind Group — Est. 2026</p>
+    <h1 class="hero-title">
+      Powering<br>
+      the <em>Future.</em><br>
+      <span class="outline">From the US</span><br>
+      to Africa.
+    </h1>
+    <!-- UPDATE: Hero subtext -->
+    <p class="hero-sub">
+      America's leading commercial advocate for landowners in wind energy —
+      and the dedicated advisory bridge connecting US capital to Africa's
+      fastest-growing renewable markets.
+    </p>
+    <div class="hero-actions">
+      <!-- UPDATE: Button hrefs -->
+      <a href="#contact" class="btn-primary"><span>Get Your Free Wind Assessment</span></a>
+      <a href="#services" class="btn-ghost">Explore Our Services</a>
+    </div>
+  </div>
+
+  <!-- UPDATE: Change stat numbers and labels as business grows -->
+  <div class="hero-stats">
+    <div class="stat-item">
+      <div class="stat-num">$207B</div>
+      <div class="stat-label">Global Wind Market by 2033</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-num">44.7 GW</div>
+      <div class="stat-label">S. Africa Wind Target by 2042</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-num">12%</div>
+      <div class="stat-label">Africa Wind CAGR</div>
+    </div>
+  </div>
+
+  <div class="scroll-indicator">
+    <div class="scroll-line"></div>
+    <span class="scroll-text">Scroll to Explore</span>
+  </div>
+</section>
+
+<!-- ============================================================
+  TICKER — UPDATE: Change ticker items as needed
+============================================================ -->
+<div class="ticker-wrap">
+  <div class="ticker">
+    <!-- Duplicated for seamless loop -->
+    <span class="ticker-item">Wind Feasibility Assessments</span>
+    <span class="ticker-item">Landowner Advocacy</span>
+    <span class="ticker-item">Developer Origination</span>
+    <span class="ticker-item">US–Africa Advisory</span>
+    <span class="ticker-item">Community Wind Development</span>
+    <span class="ticker-item">O&amp;M Services</span>
+    <span class="ticker-item">IRA Incentive Consulting</span>
+    <span class="ticker-item">DFC &amp; USAID Financing Navigation</span>
+    <span class="ticker-item">Wind Feasibility Assessments</span>
+    <span class="ticker-item">Landowner Advocacy</span>
+    <span class="ticker-item">Developer Origination</span>
+    <span class="ticker-item">US–Africa Advisory</span>
+    <span class="ticker-item">Community Wind Development</span>
+    <span class="ticker-item">O&amp;M Services</span>
+    <span class="ticker-item">IRA Incentive Consulting</span>
+    <span class="ticker-item">DFC &amp; USAID Financing Navigation</span>
+  </div>
+</div>
+
+<!-- ============================================================
+  STATEMENT SECTION — UPDATE: Edit the headline and body text
+============================================================ -->
+<section class="statement">
+  <div class="section-inner">
+    <p class="statement-label" data-reveal>Our Position</p>
+    <h2 class="statement-heading" data-reveal-words>
+      <span class="reveal-word"><span class="reveal-inner">We</span></span>
+      <span class="reveal-word"><span class="reveal-inner">work</span></span>
+      <span class="reveal-word"><span class="reveal-inner">for</span></span>
+      <span class="reveal-word"><span class="reveal-inner"><em>landowners</em></span></span>
+      <span class="reveal-word"><span class="reveal-inner">—</span></span>
+      <span class="reveal-word"><span class="reveal-inner">not</span></span>
+      <span class="reveal-word"><span class="reveal-inner">developers.</span></span>
+    </h2>
+    <div class="statement-body">
+      <!-- UPDATE: Edit positioning statement text -->
+      <p class="statement-text" data-reveal>
+        Every major wind developer has a team fighting for their interests.
+        Until now, no commercial firm has fought for yours. Meridian Wind Group
+        represents landowners, rural communities, and cooperative members —
+        ensuring you understand your full wind resource value before you sign
+        a single document. We then connect qualified landowners to the right
+        developers, earning referral fees that cost you nothing.
+      </p>
+      <div class="statement-aside" data-reveal>
+        <!-- UPDATE: Edit quote and attribution -->
+        <p class="aside-quote">
+          "The gap between landowner education and landowner action
+          is where we live — and where billions in wind value is currently left uncaptured."
+        </p>
+        <p class="aside-attr">— Meridian Wind Group, Founding Principle</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+  SERVICES — UPDATE: Edit service names, descriptions, and icons
+============================================================ -->
+<section class="services" id="services">
+  <div class="section-inner">
+    <div class="services-header">
+      <h2 class="services-title">What We <em>Do</em></h2>
+      <!-- UPDATE: Edit intro text -->
+      <p class="services-intro">
+        Six integrated service lines that take clients from
+        initial site assessment all the way to international
+        project development.
+      </p>
+    </div>
+
+    <div class="services-grid">
+
+      <!-- SERVICE 1 — UPDATE: Edit title and description -->
+      <div class="service-card" data-reveal>
+        <div class="service-num">01 / 06</div>
+        <svg class="service-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+          <path d="M9 20l-5.447-2.724A1 1 0 013 16.382V5.618a1 1 0 011.447-.894L9 7m0 13l6-3m-6 3V7m6 10l4.553 2.276A1 1 0 0021 18.382V7.618a1 1 0 00-.553-.894L15 4m0 13V4m0 0L9 7"/>
+        </svg>
+        <h3 class="service-name">Wind Feasibility Assessments</h3>
+        <p class="service-desc">
+          We analyze your land's wind resource using NREL federal data and deliver
+          a plain-English report on your potential. Free first consultation.
+          Paid reports from $2,000–$3,500.
+        </p>
+        <span class="service-arrow">↗</span>
+      </div>
+
+      <!-- SERVICE 2 -->
+      <div class="service-card" data-reveal>
+        <div class="service-num">02 / 06</div>
+        <svg class="service-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+          <path d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0z"/>
+        </svg>
+        <h3 class="service-name">Landowner Advocacy & Representation</h3>
+        <p class="service-desc">
+          We review developer offers, negotiate fair lease terms, and ensure
+          you understand every clause before you sign. Your interests first — always.
+        </p>
+        <span class="service-arrow">↗</span>
+      </div>
+
+      <!-- SERVICE 3 -->
+      <div class="service-card" data-reveal>
+        <div class="service-num">03 / 06</div>
+        <svg class="service-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+          <path d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
+        </svg>
+        <h3 class="service-name">Project Development Consulting</h3>
+        <p class="service-desc">
+          From permits through financial close — we guide projects through IRA
+          incentive optimization, PPA structuring, and developer negotiations.
+          Development fees: 1–3% of project value.
+        </p>
+        <span class="service-arrow">↗</span>
+      </div>
+
+      <!-- SERVICE 4 -->
+      <div class="service-card" data-reveal>
+        <div class="service-num">04 / 06</div>
+        <svg class="service-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+          <path d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"/>
+          <path d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/>
+        </svg>
+        <h3 class="service-name">O&M Service Contracts</h3>
+        <p class="service-desc">
+          Operations and maintenance services for small-to-mid-size turbines
+          serving farms, cooperatives, and commercial clients. Monthly contracts
+          from $2,000–$8,000.
+        </p>
+        <span class="service-arrow">↗</span>
+      </div>
+
+      <!-- SERVICE 5 -->
+      <div class="service-card" data-reveal>
+        <div class="service-num">05 / 06</div>
+        <svg class="service-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+          <path d="M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M8 3.935V5.5A2.5 2.5 0 0010.5 8h.5a2 2 0 012 2 2 2 0 104 0 2 2 0 012-2h1.064M15 20.488V18a2 2 0 012-2h3.064M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
+        </svg>
+        <h3 class="service-name">US–Africa Advisory Bridge</h3>
+        <p class="service-desc">
+          We connect African developers and IPPs to US capital (DFC, USTDA,
+          USAID Power Africa). Expert navigation of the $2M–$20M C&I project
+          tier that multilaterals fund but don't hand-hold.
+        </p>
+        <span class="service-arrow">↗</span>
+      </div>
+
+      <!-- SERVICE 6 -->
+      <div class="service-card" data-reveal>
+        <div class="service-num">06 / 06</div>
+        <svg class="service-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+          <path d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"/>
+        </svg>
+        <h3 class="service-name">Consulting Retainers</h3>
+        <p class="service-desc">
+          Monthly advisory relationships for landowners, developers, and
+          international clients navigating wind energy strategy, IRA incentives,
+          and market entry. From $3,000–$10,000/month.
+        </p>
+        <span class="service-arrow">↗</span>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+  MARKETS / WHO WE SERVE — UPDATE: Edit client segments here
+============================================================ -->
+<section class="markets" id="markets">
+  <div class="section-inner">
+    <p class="markets-label" data-reveal>Who We Serve</p>
+    <h2 class="markets-heading">
+      Your <em>land.</em><br>
+      Your <span class="outline">future.</span>
+    </h2>
+
+    <ul class="markets-list">
+      <!-- UPDATE: Change client names, tags as needed -->
+      <li class="market-item" data-reveal>
+        <span class="market-num">01</span>
+        <span class="market-name">Farmers & Rural Landowners</span>
+        <span class="market-tag">TX · IA · KS · OK · WY · MT</span>
+        <span class="market-arrow">→</span>
+      </li>
+      <li class="market-item" data-reveal>
+        <span class="market-num">02</span>
+        <span class="market-name">Rural Electric Cooperatives</span>
+        <span class="market-tag">900+ US Co-ops</span>
+        <span class="market-arrow">→</span>
+      </li>
+      <li class="market-item" data-reveal>
+        <span class="market-num">03</span>
+        <span class="market-name">Tribal Nations & Indigenous Communities</span>
+        <span class="market-tag">Sovereign Energy Rights</span>
+        <span class="market-arrow">→</span>
+      </li>
+      <li class="market-item" data-reveal>
+        <span class="market-num">04</span>
+        <span class="market-name">African IPPs & C&I Developers</span>
+        <span class="market-tag">South Africa · Kenya · Morocco</span>
+        <span class="market-arrow">→</span>
+      </li>
+      <li class="market-item" data-reveal>
+        <span class="market-num">05</span>
+        <span class="market-name">Small Municipalities & Communities</span>
+        <span class="market-tag">Community Wind Projects</span>
+        <span class="market-arrow">→</span>
+      </li>
+    </ul>
+  </div>
+</section>
+
+<!-- ============================================================
+  GLOBAL REACH — UPDATE: Edit stats and descriptions
+============================================================ -->
+<section class="global" id="global">
+  <div class="global-bg-text">GLOBAL</div>
+  <div class="section-inner">
+    <div class="global-grid">
+
+      <!-- UNITED STATES PANEL — UPDATE stats -->
+      <div class="global-panel" data-reveal>
+        <p class="global-region">🇺🇸 United States</p>
+        <h3 class="global-title">The American<br><em>Wind Belt</em></h3>
+        <p class="global-desc">
+          Wind-rich states from Texas to Montana hold billions in untapped
+          landowner value. The Inflation Reduction Act has created the most
+          favorable wind development economics in US history. We help
+          landowners capture their share before the window closes.
+        </p>
+        <div class="global-stats">
+          <!-- UPDATE: Update stats as market evolves -->
+          <div class="g-stat">
+            <span class="g-stat-num">$370B+</span>
+            <span class="g-stat-label">IRA clean energy incentives unlocked</span>
+          </div>
+          <div class="g-stat">
+            <span class="g-stat-num">900+</span>
+            <span class="g-stat-label">Rural electric cooperatives actively seeking wind solutions</span>
+          </div>
+          <div class="g-stat">
+            <span class="g-stat-num">$8K</span>
+            <span class="g-stat-label">Average annual lease income per turbine for landowners</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- AFRICA PANEL — UPDATE stats -->
+      <div class="global-panel" data-reveal>
+        <p class="global-region">🌍 Africa & Global</p>
+        <h3 class="global-title">The <em>Last</em><br>Great Frontier</h3>
+        <p class="global-desc">
+          Africa has 60% of the world's best renewable resources and only 3%
+          of global capacity. South Africa alone targets 44.7 GW of new wind
+          by 2042. We are the commercial bridge between US capital and
+          Africa's C&I wind opportunity — before anyone else builds it.
+        </p>
+        <div class="global-stats">
+          <div class="g-stat">
+            <span class="g-stat-num">44.7 GW</span>
+            <span class="g-stat-label">South Africa wind capacity target by 2042</span>
+          </div>
+          <div class="g-stat">
+            <span class="g-stat-num">12%</span>
+            <span class="g-stat-label">Africa wind energy CAGR — fastest growing globally</span>
+          </div>
+          <div class="g-stat">
+            <span class="g-stat-num">$3B+</span>
+            <span class="g-stat-label">World Bank energy reform commitment to South Africa</span>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+  PROCESS — UPDATE: Edit step titles and descriptions
+============================================================ -->
+<section class="process" id="process">
+  <div class="section-inner">
+    <div class="process-header">
+      <p class="process-eyebrow">How It Works</p>
+      <h2 class="process-title">From <em>assessment</em><br>to ownership.</h2>
+    </div>
+
+    <div class="process-steps">
+      <!-- UPDATE: Edit step titles and descriptions -->
+      <div class="process-step" data-reveal>
+        <div class="step-num">01</div>
+        <h3 class="step-title">Free Wind Assessment</h3>
+        <p class="step-desc">
+          We run your land coordinates through federal NREL wind data and
+          deliver a plain-English preliminary assessment within 48 hours.
+          Zero cost. Zero obligation.
+        </p>
+      </div>
+
+      <div class="process-step" data-reveal>
+        <div class="step-num">02</div>
+        <h3 class="step-title">Full Feasibility Report</h3>
+        <p class="step-desc">
+          If your land qualifies, we produce a comprehensive feasibility
+          report covering wind resource grade, estimated lease income,
+          IRA incentives, and next steps. From $2,000–$3,500.
+        </p>
+      </div>
+
+      <div class="process-step" data-reveal>
+        <div class="step-num">03</div>
+        <h3 class="step-title">Developer Matching</h3>
+        <p class="step-desc">
+          We match your qualified land with the right developer partner
+          from our network — and negotiate terms that protect your
+          interests. Our referral fee comes from the developer, not you.
+        </p>
+      </div>
+
+      <div class="process-step" data-reveal>
+        <div class="step-num">04</div>
+        <h3 class="step-title">Long-Term Partnership</h3>
+        <p class="step-desc">
+          From signed lease through construction and operations, we remain
+          your advocate. O&M services, lease renegotiations, and ongoing
+          advisory — we're with you for the lifetime of the project.
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+  TRUST / WHY MERIDIAN — UPDATE: Edit differentiators
+============================================================ -->
+<section class="trust">
+  <div class="section-inner">
+    <div class="trust-inner">
+      <div>
+        <!-- UPDATE: Edit headline -->
+        <h2 class="trust-headline">
+          Why<br>
+          <em>Meridian</em><br>
+          Wind Group?
+        </h2>
+      </div>
+      <ul class="trust-list">
+        <!-- UPDATE: Edit trust/differentiator items -->
+        <li class="trust-item" data-reveal>
+          <div class="trust-check"></div>
+          <p class="trust-text">
+            <strong>We work for you, not developers.</strong> Our commercial loyalty
+            is to landowners and communities — making us the only firm in this space
+            whose incentives are fully aligned with yours.
+          </p>
+        </li>
+        <li class="trust-item" data-reveal>
+          <div class="trust-check"></div>
+          <p class="trust-text">
+            <strong>Free first consultation, always.</strong> We run your preliminary
+            wind assessment at no charge. If your land doesn't qualify, we'll tell you
+            honestly and you've lost nothing.
+          </p>
+        </li>
+        <li class="trust-item" data-reveal>
+          <div class="trust-check"></div>
+          <p class="trust-text">
+            <strong>Dual-market expertise.</strong> US landowner advocacy and Africa
+            market advisory in one firm — giving clients access to both the deepest
+            domestic expertise and the broadest global perspective.
+          </p>
+        </li>
+        <li class="trust-item" data-reveal>
+          <div class="trust-check"></div>
+          <p class="trust-text">
+            <strong>Attorney-reviewed agreements.</strong> Every contract we use has
+            been independently reviewed by an energy attorney. Your protection
+            is built into our process, not an afterthought.
+          </p>
+        </li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+  CTA SECTION — UPDATE: Email, phone, and CTA text
+============================================================ -->
+<section class="cta-section" id="contact">
+  <div class="section-inner" style="position:relative;z-index:1;">
+    <p class="cta-eyebrow" data-reveal>Get Started Today</p>
+    <h2 class="cta-heading">
+      Let's find<br>your <em>wind.</em>
+    </h2>
+    <div class="cta-contact">
+      <!-- UPDATE: Replace with your actual email address -->
+      <a href="mailto:contact@meridianwindgroup.com" class="cta-email">
+        contact@meridianwindgroup.com
+      </a>
+      <span class="cta-or">or</span>
+      <!-- UPDATE: Replace with your contact form link or phone -->
+      <a href="mailto:contact@meridianwindgroup.com" class="cta-btn">
+        <span>Book a Free Wind Assessment</span>
+      </a>
+    </div>
+    <!-- UPDATE: Replace phone number -->
+    <p style="font-family:var(--font-mono);font-size:10px;letter-spacing:0.15em;color:rgba(255,255,255,0.2);text-transform:uppercase;">
+      Or call us: +1 (xxx) xxx-xxxx
+    </p>
+  </div>
+</section>
+
+<!-- ============================================================
+  FOOTER — UPDATE: Links, address, legal text
+============================================================ -->
+<footer>
+  <div class="footer-inner">
+    <div class="footer-top">
+      <div class="footer-brand">
+        <div class="footer-logo">Meridian <span>Wind</span> Group</div>
+        <!-- UPDATE: Edit tagline -->
+        <div class="footer-tagline">Powering the Future. From the US to Africa.</div>
+      </div>
+      <div class="footer-links">
+        <div class="footer-col">
+          <div class="footer-col-title">Services</div>
+          <ul>
+            <li><a href="#services">Wind Assessments</a></li>
+            <li><a href="#services">Landowner Advocacy</a></li>
+            <li><a href="#services">Project Development</a></li>
+            <li><a href="#services">O&amp;M Services</a></li>
+            <li><a href="#services">Africa Advisory</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <div class="footer-col-title">Company</div>
+          <ul>
+            <li><a href="#markets">Who We Serve</a></li>
+            <li><a href="#global">Global Reach</a></li>
+            <li><a href="#process">Our Process</a></li>
+            <!-- UPDATE: Add your real links -->
+            <li><a href="#">About</a></li>
+            <li><a href="#contact">Contact</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <div class="footer-col-title">Connect</div>
+          <ul>
+            <!-- UPDATE: Add your real social links -->
+            <li><a href="#">LinkedIn</a></li>
+            <li><a href="#">Twitter / X</a></li>
+            <!-- UPDATE: Replace email -->
+            <li><a href="mailto:contact@meridianwindgroup.com">Email Us</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <!-- UPDATE: Update year and legal text -->
+      <span class="footer-legal">© 2026 Meridian Wind Group LLC. All rights reserved.</span>
+      <span class="footer-legal">Baltimore, MD  ·  meridianwindgroup.com</span>
+    </div>
+  </div>
+</footer>
+
+<!-- ============================================================
+  JAVASCRIPT — Cursor, Scroll Animations, Particles
+============================================================ -->
+<script>
+// ── CUSTOM CURSOR ──────────────────────────────────────────
+const cursor     = document.getElementById('cursor');
+const cursorRing = document.getElementById('cursorRing');
+let mouseX = 0, mouseY = 0;
+let ringX = 0, ringY = 0;
+
+document.addEventListener('mousemove', e => {
+  mouseX = e.clientX;
+  mouseY = e.clientY;
+  cursor.style.left = mouseX + 'px';
+  cursor.style.top  = mouseY + 'px';
+});
+
+// Smooth ring follow
+(function animateRing() {
+  ringX += (mouseX - ringX) * 0.12;
+  ringY += (mouseY - ringY) * 0.12;
+  cursorRing.style.left = ringX + 'px';
+  cursorRing.style.top  = ringY + 'px';
+  requestAnimationFrame(animateRing);
+})();
+
+// Hover state on interactive elements
+document.querySelectorAll('a, button, .service-card, .market-item').forEach(el => {
+  el.addEventListener('mouseenter', () => {
+    cursor.classList.add('hover');
+    cursorRing.classList.add('hover');
+  });
+  el.addEventListener('mouseleave', () => {
+    cursor.classList.remove('hover');
+    cursorRing.classList.remove('hover');
+  });
+});
+
+// ── VIDEO LOAD ─────────────────────────────────────────────
+const heroVideo = document.getElementById('heroVideo');
+if (heroVideo) {
+  heroVideo.addEventListener('loadeddata', () => {
+    heroVideo.classList.add('loaded');
+  });
+}
+
+// ── PARTICLES ──────────────────────────────────────────────
+const particlesContainer = document.getElementById('particles');
+for (let i = 0; i < 30; i++) {
+  const p = document.createElement('div');
+  p.className = 'particle';
+  p.style.left = Math.random() * 100 + 'vw';
+  p.style.setProperty('--dur', (6 + Math.random() * 10) + 's');
+  p.style.setProperty('--delay', (Math.random() * 8) + 's');
+  particlesContainer.appendChild(p);
+}
+
+// ── SCROLL REVEAL — Intersection Observer ──────────────────
+const observerOptions = { threshold: 0.15, rootMargin: '0px 0px -60px 0px' };
+
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.classList.add('visible');
+    }
+  });
+}, observerOptions);
+
+// Observe all elements with data-reveal
+document.querySelectorAll('[data-reveal]').forEach(el => observer.observe(el));
+
+// Observe statement heading for word-by-word reveal
+document.querySelectorAll('[data-reveal-words]').forEach(el => observer.observe(el));
+
+// Observe service cards
+document.querySelectorAll('.service-card').forEach(el => observer.observe(el));
+
+// Observe market items
+document.querySelectorAll('.market-item').forEach(el => observer.observe(el));
+
+// Observe process steps
+document.querySelectorAll('.process-step').forEach(el => observer.observe(el));
+
+// Observe global panels
+document.querySelectorAll('.global-panel').forEach(el => observer.observe(el));
+
+// Observe trust items
+document.querySelectorAll('.trust-item').forEach(el => observer.observe(el));
+
+// ── PARALLAX HERO ──────────────────────────────────────────
+window.addEventListener('scroll', () => {
+  const scrollY = window.scrollY;
+  const heroVideo = document.querySelector('.hero-video');
+  if (heroVideo) {
+    heroVideo.style.transform = `scale(1.05) translateY(${scrollY * 0.3}px)`;
+  }
+  // Parallax background text in global section
+  const bgText = document.querySelector('.global-bg-text');
+  if (bgText) {
+    const rect = bgText.parentElement.getBoundingClientRect();
+    bgText.style.transform = `translate(-50%, calc(-50% + ${rect.top * 0.1}px))`;
+  }
+});
+
+// ── NAV SCROLL STATE ───────────────────────────────────────
+window.addEventListener('scroll', () => {
+  const nav = document.querySelector('nav');
+  if (window.scrollY > 80) {
+    nav.style.background = 'rgba(5,14,26,0.95)';
+    nav.style.backdropFilter = 'blur(12px)';
+    nav.style.borderBottom = '1px solid rgba(0,180,166,0.1)';
+  } else {
+    nav.style.background = '';
+    nav.style.backdropFilter = '';
+    nav.style.borderBottom = '';
+  }
+});
+
+// ── STAGGER DELAYS for lists ───────────────────────────────
+document.querySelectorAll('.market-item').forEach((el, i) => {
+  el.style.transitionDelay = `${i * 0.1}s`;
+});
+document.querySelectorAll('.trust-item').forEach((el, i) => {
+  el.style.transitionDelay = `${i * 0.1}s`;
+});
+
+// ── TEAL HOVER GLOW on cards ──────────────────────────────
+document.querySelectorAll('.service-card').forEach(card => {
+  card.addEventListener('mousemove', e => {
+    const rect = card.getBoundingClientRect();
+    const x = ((e.clientX - rect.left) / rect.width) * 100;
+    const y = ((e.clientY - rect.top) / rect.height) * 100;
+    card.style.setProperty('--gx', x + '%');
+    card.style.setProperty('--gy', y + '%');
+  });
+});
+</script>
+
+</body>
+</html>
